@@ -5,9 +5,21 @@ function App() {
   const [gridLength,setGridLength] = useState(20);
   const [gridHeight,setGridHeight] = useState(20);
   const [cells,setCells] = useState([[0,0,0],[0,0,0],[0,0,0]])
-  const [delay,setDelay] = useState(1000)
-  
+  const [delay,setDelay] = useState(1000)            
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
+  var cellHeight= ((windowSize.current[1]-100)/gridHeight)-2
+  var cellWidth = (windowSize.current[0]/gridLength)-2
+  const filled = {
+    "backgroundColor":"lime",
+    "height":cellHeight,
+    "width":cellWidth
+  }
+  const empty = {
+    "backgroundColor":"#202020",
+    "height":cellHeight,
+    "width":cellWidth
+  }
+  
 
   function year(){
     
@@ -92,30 +104,16 @@ function App() {
       <main className="focus">
         <div className="table">
           {cells.map((row,x)=>{
-            var cellHeight= ((windowSize.current[1]-100)/gridHeight)-2
-            var cellWidth = (windowSize.current[0]/gridLength)-2
+
             return(
               <div className="row" key={x} >
                 {row.map((cell,y)=>{
                   if(x==0||x==gridLength+1||y==0||y==gridHeight+1){
 
                   }else{
-                    if(!!cell){
-                      //console.log("cell",cell,"x",x,"y",y)
-                      return(
-
-                      <div className="cell" onClick={()=>flip(x,y)} style={{"backgroundColor":"lime","height":cellHeight,"width":cellWidth}}>
-                        
-                      </div>
-                      )
-                    }else{
-                      // console.log("empty")
-                      return(
-                        <div className="empty" onClick={()=>flip(x,y)} style={{"backgroundColor":"#202020","height":cellHeight,"width":cellWidth}}>
-                          
-                        </div>
-                      )
-                    }
+                    return(
+                      <div className="cell" onClick={()=>flip(x,y)} style={!!cell?filled:empty}/>
+                    )
                   }
                   
                 })} 
