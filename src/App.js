@@ -80,12 +80,13 @@ function App() {
   }
 
   function flip(x,y){
-    if(cells[x][y]==1){
-      cells[x][y]=0
-      setCells(cells)
+    const temp= cells
+    if(temp[x][y]==1){
+      temp[x][y]=0
+      setCells([...temp])
     }else{
-      cells[x][y]=1
-      setCells(cells)
+      temp[x][y]=1
+      setCells([...temp])
     }
     
   }
@@ -99,6 +100,9 @@ function App() {
       <header className="navbar">
         <button onClick={()=>year()}>
           next year
+        </button>
+        <button onClick={()=>reset()}>
+          reset
         </button>
       </header>
       <main className="focus">
