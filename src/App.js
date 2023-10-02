@@ -72,7 +72,7 @@ function App() {
           tempRow.push(1)
         }
       }
-      tempRow.push(0)
+      tempRow.push(0);
       temp.push(tempRow);
     }
     temp.push(border)
